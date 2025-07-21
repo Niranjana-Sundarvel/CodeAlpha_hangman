@@ -1,0 +1,131 @@
+import random
+words = ["table", "apple", "chair", "mouse", "phone"]
+
+def hangman():
+    word = random.choice(words)
+    word_list = ["_"] * len(word)
+    guessed = False
+    guessed_letter = []
+    guessed_word = []
+    tries = 6
+
+    print("Let's play Hangman!")
+    print(display_hangman(tries))
+    print(word_list)
+    print("\n")
+
+    while not guessed and tries > 0:
+        guess = input("Please guess a letter or word: ").lower()
+
+        if len(guess) == 1 and guess.isalpha():
+            if guess in guessed_letter:
+                print("You already guessed the letter", guess)
+            elif guess not in word:
+                print(guess, "is not in the word.")
+                tries -= 1
+                guessed_letter.append(guess)
+            else:
+                print("Good job,", guess, "is in the word!")
+                guessed_letter.append(guess)
+                word_as_list = list(word)
+                indices = [i for i, letter in enumerate(word_as_list) if letter == guess]
+                for index in indices:
+                    word_list[index] = guess
+        elif len(guess) == len(word) and guess.isalpha():
+            if guess in guessed_word:
+                print("You already guessed the word", guess)
+            elif guess != word:
+                print(guess, "is not the word.")
+                tries -= 1
+                guessed_word.append(guess)
+            else:
+                guessed = True
+                word_list = list(guess)
+        else:
+            print("Not a valid guess.")
+        
+        print(display_hangman(tries))
+        print(word_list)
+        print("\n")
+    
+    if guessed:
+        print("Congratulations, you guessed the word!")
+    else:
+        print("Sorry, you ran out of tries. The word was " + word)
+def display_hangman(tries):
+    stages = [
+                """
+                   --------
+                   |      |
+                   |      O
+                   |     \\|/
+                   |      |
+                   |     / \\
+                   -
+                """,
+                
+                """
+                   --------
+                   |      |
+                   |      O
+                   |     \\|/
+                   |      |
+                   |     / 
+                   -
+                """,
+                
+                """
+                   --------
+                   |      |
+                   |      O
+                   |     \\|/
+                   |      |
+                   |      
+                   -
+                """,
+                
+                """
+                   --------
+                   |      |
+                   |      O
+                   |     \\|
+                   |      |
+                   |     
+                   -
+                   
+                """,
+                
+                """
+                   --------
+                   |      |
+                   |      O
+                   |      |
+                   |      |
+                   |     
+                   -
+                """,
+                
+                """
+                   --------
+                   |      |
+                   |      O
+                   |    
+                   |      
+                   |     
+                   -
+                """,
+                
+                """
+                   --------
+                   |      |
+                   |      
+                   |    
+                   |      
+                   |     
+                   -
+                """
+    ]
+    return stages[tries]
+
+if __name__ == "__main__":
+    hangman()
