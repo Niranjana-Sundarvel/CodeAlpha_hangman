@@ -1,1 +1,2 @@
-# CodeAlpha_hangman
+Hangman is a guessing game where one player thinks of a word, and the other player tries to guess the word by suggesting letters. For each letter that is not in the word, the first player draws a part of a hangman's gallows. The game continues until the word is guessed or the gallows is complete and the player who is guessing the word is "hanged."The objective of the game is to guess the word before the gallows is complete.
+The gameplay used here is a word is chosen, and its length is revealed. The guessing player tries to guess a letter.If the letter is in the word, it is filled in the corresponding blanks.If the letter is not in the word, a part of the gallows is drawn.The game continues until the word is guessed or the gallows is complete.
